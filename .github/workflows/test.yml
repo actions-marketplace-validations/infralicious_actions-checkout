@@ -1,0 +1,59 @@
+name: Test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repo files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Validate action file
+        run: |
+          python3 - << 'PY'
+          import re
+          import sys
+          import yaml
+          data = yaml.safe_load(open('action.yml'))
+          inputs = data['inputs']
+          assert len(inputs) == 21, inputs.keys()
+          assert inputs['persist-credentials']['default'] is False
+          text = open('action.yml').read()
+          assert 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' in text
+          step_with = data['runs']['steps'][0]['with']
+          assert list(step_with.keys()) == list(inputs.keys())
+          print('action file is valid')
+          PY
+      - name: Checkout with defaults
+        id: default
+        uses: ./
+        with:
+          path: test-default
+      - name: Checkout with persist true
+        id: persist
+        uses: ./
+        with:
+          path: test-persist
+          persist-credentials: true
+      - name: Check outputs and credential state
+        run: |
+          test -n "${{ steps.default.outputs.ref }}"
+          test -n "${{ steps.default.outputs.commit }}"
+          test -n "${{ steps.persist.outputs.ref }}"
+          test -n "${{ steps.persist.outputs.commit }}"
+          test -f test-default/README.md
+          test -f test-persist/README.md
+          if git -C test-default config --local --list | grep -Eq 'extraheader|git-credentials-'; then
+            echo "default checkout persisted a credential"
+            exit 1
+          fi
+          if ! git -C test-persist config --local --list | grep -Eq 'extraheader|git-credentials-'; then
+            echo "persist true checkout did not persist a credential"
+            exit 1
+          fi

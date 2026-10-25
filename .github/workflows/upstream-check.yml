@@ -1,0 +1,81 @@
+name: Upstream check
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Set up repo files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check upstream release, pin, and inputs
+        run: |
+          python3 - << 'PY'
+          import base64
+          import json
+          import re
+          import sys
+          import urllib.request
+          import yaml
+          local = yaml.safe_load(open('action.yml'))
+          local_inputs = local['inputs']
+          local_with = local['runs']['steps'][0]['with']
+          readme = open('README.md').read()
+          expected = re.search(r'Upstream version is (v[0-9]+\.[0-9]+\.[0-9]+)', readme).group(1)
+          action_text = open('action.yml').read()
+          pin = re.search(r'actions/checkout@([0-9a-f]{40})', action_text).group(1)
+          def get(url):
+              req = urllib.request.Request(url, headers={'User-Agent': 'infralicious-actions-checkout'})
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  return json.load(resp)
+          latest = get('https://api.github.com/repos/actions/checkout/releases/latest')['tag_name']
+          upstream_raw = get(f'https://api.github.com/repos/actions/checkout/contents/action.yml?ref={latest}')
+          upstream = yaml.safe_load(base64.b64decode(upstream_raw['content']))
+          upstream_inputs = upstream['inputs']
+          diffs = []
+          if local_inputs.get('persist-credentials', {}).get('default') is not False:
+              diffs.append('persist-credentials default is not false in local action')
+          if list(local_with.keys()) != list(local_inputs.keys()):
+              diffs.append('local step inputs do not match local inputs')
+          for name, up in upstream_inputs.items():
+              if name not in local_inputs:
+                  diffs.append(f'missing input: {name}')
+                  continue
+              loc = local_inputs[name]
+              if up.get('description') != loc.get('description'):
+                  diffs.append(f'description differs for input: {name}')
+              if up.get('required') != loc.get('required'):
+                  diffs.append(f'required differs for input: {name}')
+              if name == 'persist-credentials':
+                  if up.get('default') is not True:
+                      diffs.append('upstream persist-credentials default is not true')
+              elif up.get('default') != loc.get('default'):
+                  diffs.append(f'default differs for input: {name}: upstream {up.get("default")!r}, local {loc.get("default")!r}')
+          for name in local_inputs:
+              if name not in upstream_inputs:
+                  diffs.append(f'extra input: {name}')
+          if latest != expected:
+              print(f'Upstream has a new release: {latest}, expected: {expected}')
+              print('Update the pin, the README version, and the repo tag.')
+              print('Input diff against new upstream:')
+              for d in diffs:
+                  print(f'- {d}')
+              sys.exit(1)
+          tag_sha = get(f'https://api.github.com/repos/actions/checkout/git/ref/tags/{expected}')['object']['sha']
+          if tag_sha != pin:
+              print(f'Pin does not match tag {expected}: pin {pin}, tag {tag_sha}')
+              sys.exit(1)
+          if diffs:
+              print('Local inputs differ from upstream, except for persist-credentials:')
+              for d in diffs:
+                  print(f'- {d}')
+              sys.exit(1)
+          print(f'Upstream is current: {expected} at {pin}')
+          print('Inputs match upstream, except persist-credentials false.')
+          PY
