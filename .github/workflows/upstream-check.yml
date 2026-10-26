@@ -31,9 +31,8 @@ jobs:
           local = yaml.safe_load(open('action.yml'))
           local_inputs = local['inputs']
           local_with = local['runs']['steps'][0]['with']
-          readme = open('README.md').read()
-          expected = re.search(r'Upstream version is (v[0-9]+\.[0-9]+\.[0-9]+)', readme).group(1)
           action_text = open('action.yml').read()
+          expected = re.search(r'# (v[0-9]+\.[0-9]+\.[0-9]+)', action_text).group(1)
           pin = re.search(r'actions/checkout@([0-9a-f]{40})', action_text).group(1)
           def get(url):
               req = urllib.request.Request(url, headers={'User-Agent': 'infralicious-actions-checkout'})
@@ -67,7 +66,7 @@ jobs:
                   diffs.append(f'extra input: {name}')
           if latest != expected:
               print(f'Upstream has a new release: {latest}, expected: {expected}')
-              print('Update the pin, the README version, and the repo tag.')
+              print('Update the pin and the repo tag.')
               print('Input diff against new upstream:')
               for d in diffs:
                   print(f'- {d}')

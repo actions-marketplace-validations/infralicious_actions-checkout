@@ -17,20 +17,21 @@ Check compares wrapper against upstream oracle.
 ## Update to a new upstream version
 
 Renovate opens a PR when upstream releases a new tag.
-Renovate updates code SHA lines and README version lines.
-Renovate groups those updates in one PR.
+Renovate updates code SHA lines only.
+README has no version lines and no SHAs.
+README needs no update for a new version.
 Review the PR for input changes.
 Upstream-check fails if inputs change.
 Add input changes to the PR when it fails.
 Set persist-credentials default to false only.
 Change no other input default.
-Update README upstream SHA line from the PR diff.
 Merge the PR when tests pass.
-Create a new repo tag that matches upstream tag.
-Update README repo SHA after tag creation.
-Update README SHA diff after tag creation.
+Create a new signed repo tag that matches upstream tag.
+Create a GitHub Release for that tag.
+Release notes must link to the upstream release.
+Release notes must use the upstream release URL for that tag.
 Renovate cannot create a tag.
-Renovate cannot know repo SHA before tag exists.
+Renovate cannot create a release.
 Manual fallback follows if Renovate misses an update.
 Read the upstream-check failure log for the new tag name.
 Fetch upstream action.yml for the new tag.
@@ -38,8 +39,10 @@ Copy all inputs from upstream to local action.yml.
 Set persist-credentials default to false only.
 Change no other input default.
 Update the upstream pin SHA to the new tag SHA.
-Update README version and SHA to the new values.
-Create a new repo tag that matches upstream tag.
+Keep the version comment on the pin line.
+Create a new signed repo tag that matches upstream tag.
+Create a GitHub Release for that tag.
+Release notes must link to the upstream release.
 Run the test workflow and check it passes.
 Upstream-check also checks inputs on each run.
 It fails if any default differs except persist-credentials.
@@ -55,6 +58,7 @@ Action works without a Marketplace listing.
 Users can use the repo tag directly.
 Publish needs branding in action.yml.
 Publish needs a GitHub Release for the tag.
+Publish needs a signed tag for the tag.
 Publish needs the Marketplace Developer Agreement.
 Publish needs a primary category.
 Publish needs two factor authentication.
@@ -71,6 +75,17 @@ Immutable release locks its tag to one commit.
 Floating tag and immutable release cannot both work.
 Exact tag only keeps releases immutable.
 
+## Releases
+
+Sign every tag with SSH signing.
+Create a Release for every tag.
+Release must be immutable.
+Verify the release with gh release verify.
+Release notes must link to the upstream release.
+Release notes must not hardcode SHAs.
+Use placeholders in README, not in release notes links.
+Upstream release URL uses the upstream tag name.
+
 ## Immutable releases
 
 Immutable releases are enabled at repo level.
@@ -79,3 +94,6 @@ Enable it with gh api PUT for immutable releases.
 Future releases will be immutable automatically.
 Do not move a tag after its release is created.
 Tag cannot move, delete, or reuse after release.
+Do not delete an immutable release to reuse its tag.
+Deleted immutable tag name cannot be reused.
+Verify a release with gh release verify for its tag.

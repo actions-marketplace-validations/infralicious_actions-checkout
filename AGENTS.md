@@ -16,6 +16,11 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Immutable release locks its tag to one commit.
 - Immutable releases are enabled at repo level via gh cli.
 - Settings file cannot enable immutable releases.
+- Sign every tag with SSH signing.
+- Create a Release for every tag.
+- Release notes must link to the upstream release.
+- Verify a release with gh release verify.
+- Do not delete an immutable release to reuse its tag.
 - Old upstream versions get no support.
 - Tag stays at its commit after it ships.
 - Main changes do not move a shipped tag.
@@ -29,11 +34,10 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 
 ## Hardcoded versions and SHAs
 
-- Do not hardcode a SHA or version in prose where it is not essential.
+- Do not hardcode a SHA in README.
+- Use <upstream-sha> and <repo-sha> placeholders in README.
 - Keep a SHA in code lines that pin an action.
-- Keep a version and SHA in diff examples and use examples.
-- Keep a version and SHA in the Upstream pin section only.
-- Keep a SHA to tag mapping where a SHA needs its tag.
+- Keep a version comment on a code SHA line.
 - Remove a version from descriptions, intros, and prose comments.
 - Generalize a comment when a version would go stale.
 - Repo description must not mention an exact version.
@@ -46,15 +50,16 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Renovate config lives in renovate.json5.
 - Renovate runs before 3am on Monday.
 - Renovate groups GitHub Actions updates in one PR.
-- Renovate updates code SHA lines and README version lines.
+- Renovate updates code SHA lines only.
+- README has no version lines and no SHAs.
 - Version comment on a SHA line is essential for Renovate.
 - Renovate cannot update a SHA without a version comment.
 - Keep version comment on every SHA pin line.
 - This rule overrides the no hardcoded version rule for code lines.
 - Renovate cannot create a repo tag.
-- Renovate cannot know repo SHA before tag exists.
+- Renovate cannot create a release.
 - Human still creates the tag after merge.
-- Human still updates repo SHA after tag.
+- Human still creates the release after tag.
 - Upstream-check still catches input changes.
 - Human adds input changes to the Renovate PR when needed.
 

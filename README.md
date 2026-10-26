@@ -2,7 +2,7 @@
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/infralicious/actions-checkout/badge)](https://securityscorecards.dev/viewer/?uri=github.com/infralicious/actions-checkout)
 [![Test](https://github.com/infralicious/actions-checkout/actions/workflows/test.yml/badge.svg)](https://github.com/infralicious/actions-checkout/actions/workflows/test.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 This action passes through to `actions/checkout`.
 It uses the full upstream SHA, not a moving tag.
@@ -57,15 +57,15 @@ Tag form:
 SHA form:
 
 ```diff
-- uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+- uses: actions/checkout@<upstream-sha> # v7.0.1
 -   with:
 -     persist-credentials: false
-+ uses: infralicious/actions-checkout@8f06203922881eeaacf2183f45a32c937e95a321 # v7.0.1
++ uses: infralicious/actions-checkout@<repo-sha> # v7.0.1
 ```
 
 Tag in this repo pins upstream SHA internally.
-Our SHA for v7.0.1 is 8f06203922881eeaacf2183f45a32c937e95a321.
-Use that SHA for full SHA pinning.
+Use the commit SHA for the tag for full SHA pinning.
+Find that SHA on the release page.
 Use commit SHA, not tag object SHA.
 
 ## Use
@@ -95,12 +95,8 @@ Configure git credentials yourself for a later push.
 It returns `ref` from upstream.
 It returns `commit` from upstream.
 
-## Upstream pin
+## Tags
 
-Upstream version is v7.0.1.
-Upstream SHA is `3d3c42e5aac5ba805825da76410c181273ba90b1`.
-This repo tag is v7.0.1.
-This repo SHA is `8f06203922881eeaacf2183f45a32c937e95a321`.
 Use exact version tag only, not floating major tag.
 A floating major tag does not exist in this repo.
 Floating tag cannot move after an immutable release.
