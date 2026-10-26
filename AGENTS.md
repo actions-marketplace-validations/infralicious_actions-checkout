@@ -12,6 +12,7 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Local default is false, upstream default is true.
 - Repo tag matches upstream tag exactly.
 - No floating major tag exists in this repo.
+- Old upstream versions get no support.
 - Tag stays at its commit after it ships.
 - Main changes do not move a shipped tag.
 - New tag ships only with a new upstream tag.
@@ -65,6 +66,31 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 
 - Test workflow runs on push to main.
 - Upstream-check workflow runs weekly and on manual dispatch.
+- Scorecard workflow runs on push and weekly.
+- Scorecard badge lives in README.
+- Scorecard badge needs a published Scorecard run first.
+
+## Automation
+
+- Repo is not fully automated.
+- Test, Upstream-check, Settings, Scorecard, and Renovate run automatically.
+- Human still reviews and merges Renovate PRs.
+- Human still creates signed tags.
+- Human still pushes after approval.
+- Full automation would need auto merge and auto tag.
+- Auto tag would not be SSH signed by the user.
+- Auto merge would ship upstream changes without review.
+- Keep human review for this security action.
+
+## Marketplace
+
+- Action is not published on the Marketplace yet.
+- Action works without a Marketplace listing.
+- Publish needs branding, a release, agreement, and category.
+- Publish needs two factor authentication.
+- Org owner must accept the agreement.
+- Name must be unique on the Marketplace.
+- Current name is Checkout, which may not be unique.
 - Test workflow setup uses upstream, not this wrapper.
 - Local test steps use `./` for this wrapper.
 - Upstream-check setup stays independent from this wrapper.
