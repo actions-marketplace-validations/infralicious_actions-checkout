@@ -89,6 +89,17 @@ You may set `persist-credentials` to `true` when you need it.
 With `false`, later steps cannot push with the stored token.
 Configure git credentials yourself for a later push.
 
+## Repo workflows
+
+Repo workflows use upstream for setup only.
+Test steps use ./ for our wrapper.
+Setup needs repo files before ./ can run.
+Published wrapper would test old tag, not local code.
+Published wrapper failure would block local test.
+Upstream setup keeps local test independent.
+Upstream-check setup keeps the check independent.
+Check compares wrapper against upstream oracle.
+
 ## Outputs
 
 It returns `ref` from upstream.

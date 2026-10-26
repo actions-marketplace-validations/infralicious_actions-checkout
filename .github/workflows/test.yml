@@ -10,6 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      # Setup uses upstream, not our wrapper.
+      # Local wrapper needs repo files first.
+      # Runner cannot find ./ without checkout.
+      # Published wrapper would test old tag, not local code.
+      # Published wrapper failure would block local test.
+      # Upstream setup keeps local test independent.
       - name: Set up repo files
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -30,6 +36,7 @@ jobs:
           assert list(step_with.keys()) == list(inputs.keys())
           print('action file is valid')
           PY
+      # These steps test our wrapper.
       - name: Checkout with defaults
         id: default
         uses: ./
