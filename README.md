@@ -59,13 +59,13 @@ SHA form:
 - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 -   with:
 -     persist-credentials: false
-+ uses: infralicious/actions-checkout@v7.0.1
++ uses: infralicious/actions-checkout@c9b2547edbff66d33a1c6b175ea258c8d10c6689 # v7.0.1
 ```
 
 Tag v7.0.1 in this repo pins upstream SHA internally.
-Full SHA form for this repo needs its commit SHA.
-That SHA exists only after the first push.
-Update this doc with that SHA after push.
+Our SHA for v7.0.1 is c9b2547edbff66d33a1c6b175ea258c8d10c6689.
+Use that SHA for full SHA pinning.
+Use commit SHA, not tag object SHA.
 
 ## Use
 
@@ -110,6 +110,7 @@ It returns `commit` from upstream.
 Upstream version is v7.0.1.
 Upstream SHA is `3d3c42e5aac5ba805825da76410c181273ba90b1`.
 This repo tag is v7.0.1.
+This repo SHA is `c9b2547edbff66d33a1c6b175ea258c8d10c6689`.
 Use v7.0.1 only, not v7.
 A v7 tag does not exist in this repo.
 Update this tag when upstream releases a new version.
