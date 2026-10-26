@@ -82,6 +82,14 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Auto merge would ship upstream changes without review.
 - Keep human review for this security action.
 
+## Before you set persist false
+
+- Check the job for git push, fetch, pull, submodule update, LFS pull, private clone, or release tool.
+- If the job needs any of those, keep persist true or split the job.
+- Do not set false in a push job.
+- Use gh auth setup-git only in a push job.
+- Read README Gotchas section before you change a workflow to false.
+
 ## Marketplace
 
 - Action is not published on the Marketplace yet.

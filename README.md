@@ -115,4 +115,76 @@ It does not scan artifacts for tokens.
 Use least privilege permissions in each job.
 This repo does not support upstream versions older than the current tag.
 
+## Gotchas when you switch to false
+
+False does not break checkout itself.
+Checkout step authenticates itself.
+Initial submodules and LFS fetch still work.
+
+Later git write fails.
+Later git push fails.
+Later git fetch fails.
+Later git pull fails.
+Error is 403 or authentication failed.
+Error does not name persist-credentials.
+Check local git config for extraheader or includeIf to diagnose.
+
+Later private clones fail.
+Later Go, npm, or pip git dependencies from private repos fail.
+Later submodule update fails.
+Later LFS pull fails.
+Configure credentials for that specific step only.
+
+Release tools fail with false.
+Semantic release fails.
+Release please fails.
+Changelog push fails.
+Tag push fails.
+Badge push fails.
+Put git write in a separate job with persist true.
+Keep untrusted code out of that job.
+
+SSH key also does not persist.
+Checkout step uses SSH command env only during checkout.
+Later git over SSH fails.
+
+gh CLI still works with false.
+gh uses a token directly, not git config.
+Use gh for API work, not for git push.
+
+GITHUB_TOKEN push does not trigger workflows.
+Push with GITHUB_TOKEN will not start on push workflows.
+Use a GitHub App token if downstream CI must run.
+App token needs contents write.
+
+False does not hide the token from job steps.
+Token power comes from the permissions block.
+Set contents read where no write is needed.
+False is defense in depth, not a replacement for least privilege.
+
+Manual credentials leak again if you restore them.
+If you restore credentials by hand for a push, clean them up after push.
+Do not upload artifacts that contain git config.
+Do push as the last step, or in an isolated job.
+
+gh auth setup-git is a workaround for a push job.
+Run gh auth setup-git before push.
+It configures git to use the gh token.
+Use it only in the push job.
+
+A second checkout with false does not fix push.
+A second checkout with true does fix push.
+True then persists the token for the rest of that job.
+
+Commit creation still needs user config.
+False does not set git user name or email.
+Set user name and email before commit, regardless of persist.
+
+Fork code in pull_request_target needs care.
+Untrusted fork code cannot use a stored token with false.
+That limit is intended.
+If a job must push to a fork, configure credentials explicitly.
+Do not run untrusted code in that same job.
+
+
 See [CONTRIBUTING](CONTRIBUTING.md) for maintainer steps.
