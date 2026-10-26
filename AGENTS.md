@@ -12,6 +12,10 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Local default is false, upstream default is true.
 - Repo tag matches upstream tag exactly.
 - No floating major tag exists in this repo.
+- Floating tag cannot move after an immutable release.
+- Immutable release locks its tag to one commit.
+- Immutable releases are enabled at repo level via gh cli.
+- Settings file cannot enable immutable releases.
 - Old upstream versions get no support.
 - Tag stays at its commit after it ships.
 - Main changes do not move a shipped tag.

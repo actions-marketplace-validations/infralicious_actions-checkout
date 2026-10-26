@@ -9,6 +9,9 @@
 # Warning: anyone with push access can edit this file and change
 # repository settings, up to admin level.
 # App install confirmed for this org.
+# Immutable releases are not in this file.
+# Settings app cannot set immutable releases.
+# Enable it with gh api PUT for immutable releases.
 
 repository:
   name: actions-checkout

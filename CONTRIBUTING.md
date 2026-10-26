@@ -64,9 +64,18 @@ Name must be unique on the Marketplace.
 ## Major tag
 
 No floating major tag exists in this repo.
-Use exact version tag only, not a floating major tag.
-A floating major tag would move on each release.
-A moving tag breaks SHA pinning for users.
-If a major tag is ever added, move it after each new version tag.
-Move it with a signed tag and a force push.
-A workflow move would not be SSH signed.
+Do not add a floating major tag.
+Use exact version tag only.
+Floating tag must move on each release.
+Immutable release locks its tag to one commit.
+Floating tag and immutable release cannot both work.
+Exact tag only keeps releases immutable.
+
+## Immutable releases
+
+Immutable releases are enabled at repo level.
+Settings file cannot enable immutable releases.
+Enable it with gh api PUT for immutable releases.
+Future releases will be immutable automatically.
+Do not move a tag after its release is created.
+Tag cannot move, delete, or reuse after release.

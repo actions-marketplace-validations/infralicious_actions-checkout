@@ -101,6 +101,9 @@ This repo tag is v7.0.1.
 This repo SHA is `c9b2547edbff66d33a1c6b175ea258c8d10c6689`.
 Use exact version tag only, not floating major tag.
 A floating major tag does not exist in this repo.
+Floating tag cannot move after an immutable release.
+Immutable release locks its tag to one commit.
+Exact tag only keeps releases immutable.
 
 ## Inputs
 
