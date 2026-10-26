@@ -1,0 +1,87 @@
+# AGENTS.md — actions-checkout
+
+Instructions for AI agents working in this repo.
+Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
+
+## What this repo is
+
+- Composite action, not a copy of upstream code.
+- Action passes every input through to upstream checkout.
+- Action pins upstream by full SHA, not a moving tag.
+- Only `persist-credentials` default differs from upstream.
+- Local default is false, upstream default is true.
+- Repo tag matches upstream tag exactly.
+- No floating major tag exists in this repo.
+- Tag stays at its commit after it ships.
+- Main changes do not move a shipped tag.
+- New tag ships only with a new upstream tag.
+
+## Language rule
+
+- Write everything in ASD-STE100 Simplified Technical English.
+- Short sentences (max 20 words). Active voice. One idea per sentence.
+- No idioms, slang, or complex words. No em dashes. Use hyphens or restructure.
+
+## Hardcoded versions and SHAs
+
+- Do not hardcode a SHA or version in prose where it is not essential.
+- Keep a SHA in code lines that pin an action.
+- Keep a version and SHA in diff examples and use examples.
+- Keep a version and SHA in the Upstream pin section only.
+- Keep a SHA to tag mapping where a SHA needs its tag.
+- Remove a version from descriptions, intros, and prose comments.
+- Generalize a comment when a version would go stale.
+- Repo description must not mention an exact version.
+- Version comment on a code SHA line is an exception.
+- Renovate needs that comment to find the tag for a SHA.
+
+## Renovate
+
+- Renovate owns action SHA bumps.
+- Renovate config lives in renovate.json.
+- Renovate runs before 3am on Monday.
+- Renovate groups GitHub Actions updates in one PR.
+- Renovate updates code SHA lines and README version lines.
+- Version comment on a SHA line is essential for Renovate.
+- Renovate cannot update a SHA without a version comment.
+- Keep version comment on every SHA pin line.
+- This rule overrides the no hardcoded version rule for code lines.
+- Renovate cannot create a repo tag.
+- Renovate cannot know repo SHA before tag exists.
+- Human still creates the tag after merge.
+- Human still updates repo SHA after tag.
+- Upstream-check still catches input changes.
+- Human adds input changes to the Renovate PR when needed.
+
+## Commits and pushes
+
+- Sign every commit (SSH signing is configured repo-local).
+- Confirm before pushing, unless the user has told you to push freely.
+- Push pattern: `git -c credential.helper='!gh auth git-credential' push origin main`.
+- Small, topical commits. One change per commit.
+- After a push, check the Test workflow run and report the result.
+
+## Workflows
+
+- Test workflow runs on push to main.
+- Upstream-check workflow runs weekly and on manual dispatch.
+- Test workflow setup uses upstream, not this wrapper.
+- Local test steps use `./` for this wrapper.
+- Upstream-check setup stays independent from this wrapper.
+- Upstream-check compares every input against upstream.
+- It fails if any default differs except `persist-credentials`.
+- It fails if an input is added, removed, or renamed.
+- A human must apply an upstream diff by hand.
+- Automation never changes a default by itself.
+
+## Repo settings as code
+
+- `.github/settings.yml` is enforced by the Settings app. Change settings in that file, not in the GitHub UI.
+- Main branch protection is on: no force push, no deletion. Direct pushes still work.
+- No review or check gates are set on main.
+
+## Do not touch
+
+- Do not copy upstream code into this repo.
+- Do not enter card details on the user's behalf.
+- Do not publish an email address in this repo.
