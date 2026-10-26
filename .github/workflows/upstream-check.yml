@@ -16,7 +16,7 @@ jobs:
       # Check compares wrapper against upstream oracle.
       # Upstream setup gives that oracle directly.
       - name: Set up repo files
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # setup uses upstream, not wrapper
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Check upstream release, pin, and inputs

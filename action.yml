@@ -127,7 +127,7 @@ runs:
       # Wrapper pins upstream by full SHA.
       # Pin matches repo tag.
       # Wrapper passes all inputs to upstream.
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # upstream, passthrough only
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         # Fallback to the workflow context when the caller omits these inputs.
         # A composite action cannot evaluate a context default by itself.

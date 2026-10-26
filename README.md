@@ -118,8 +118,23 @@ Match the new tag to the new upstream version.
 
 ## Update to a new upstream version
 
-Upstream-check workflow fails when upstream releases a new tag.
-Read the failure log for the new tag name.
+Renovate opens a PR when upstream releases a new tag.
+Renovate updates code SHA lines and README version lines.
+Renovate groups those updates in one PR.
+Review the PR for input changes.
+Upstream-check fails if inputs change.
+Add input changes to the PR when it fails.
+Set persist-credentials default to false only.
+Change no other input default.
+Update README upstream SHA line from the PR diff.
+Merge the PR when tests pass.
+Create a new repo tag that matches upstream tag.
+Update README repo SHA after tag creation.
+Update README SHA diff after tag creation.
+Renovate cannot create a tag.
+Renovate cannot know repo SHA before tag exists.
+Manual fallback follows if Renovate misses an update.
+Read the upstream-check failure log for the new tag name.
 Fetch upstream action.yml for the new tag.
 Copy all inputs from upstream to local action.yml.
 Set persist-credentials default to false only.
@@ -128,7 +143,7 @@ Update the upstream pin SHA to the new tag SHA.
 Update README version and SHA to the new values.
 Create a new repo tag that matches upstream tag.
 Run the test workflow and check it passes.
-Upstream-check workflow also checks inputs on each run.
+Upstream-check also checks inputs on each run.
 It fails if any default differs except persist-credentials.
 It fails if an input is added, removed, or renamed.
 It prints the exact input diff in the log.
