@@ -1,0 +1,77 @@
+# Repository settings as code for infralicious/actions-checkout.
+# The Settings app reads this file on every push:
+# https://probot.github.io/apps/settings/
+# The app enforces the values in this file.
+# Change settings here. Do not change them in the GitHub UI.
+# This repo is public and the plan is free.
+# Every setting here costs nothing.
+#
+# Warning: anyone with push access can edit this file and change
+# repository settings, up to admin level.
+# App install confirmed for this org.
+
+repository:
+  name: actions-checkout
+  description: Checkout action with persist-credentials false by default, pinned to actions/checkout v7.0.1
+  # Topics stay a string. The app splits this value on commas.
+  topics: checkout, github-actions, security
+  private: false
+  has_issues: true
+  has_projects: true
+  # The wiki is off. Nobody uses it, and a public wiki is open surface.
+  has_wiki: false
+  default_branch: main
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  # Merged branches delete themselves. No stale branch pile-up.
+  delete_branch_on_merge: true
+  # Dependabot alerts on. The app re-enables them if the UI drifts.
+  enable_vulnerability_alerts: true
+  web_commit_signoff_required: false
+
+# Main branch protection. This repo is public, so protection is free.
+# Protection blocks force pushes and branch deletion.
+# All review and check gates stay off. Direct pushes still work.
+# Admins keep a bypass (enforce_admins false).
+branches:
+  - name: main
+    protection:
+      required_status_checks: null
+      enforce_admins: false
+      required_pull_request_reviews: null
+      restrictions: null
+
+# The full current label set. Keep this list complete: the app
+# reconciles labels against it.
+labels:
+  - name: bug
+    color: d73a4a
+    description: Something isn't working
+  - name: documentation
+    color: "0075ca"
+    description: Improvements or additions to documentation
+  - name: duplicate
+    color: cfd3d7
+    description: This issue or pull request already exists
+  - name: enhancement
+    color: a2eeef
+    description: New feature or request
+  - name: good first issue
+    color: 7057ff
+    description: Good for newcomers
+  - name: help wanted
+    color: "008672"
+    description: Extra attention is needed
+  - name: invalid
+    color: e4e669
+    description: This doesn't seem right
+  - name: question
+    color: d876e3
+    description: Further information is requested
+  - name: wontfix
+    color: ffffff
+    description: This will not be worked on
+  - name: dependencies
+    color: "0366d6"
+    description: Pull requests that update a dependency file
