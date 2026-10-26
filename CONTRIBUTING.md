@@ -86,6 +86,19 @@ Release notes must not hardcode SHAs.
 Use placeholders in README, not in release notes links.
 Upstream release URL uses the upstream tag name.
 
+## SHA pinning and tag ruleset
+
+SHA pinning is enforced at repo level.
+Settings file cannot set SHA pinning.
+Enable it with gh api PUT for Actions permissions.
+All external actions must use full SHA, not a tag.
+Local ./ action is not a third party action.
+Tag ruleset protects v star tags.
+Settings file cannot set tag ruleset.
+Ruleset blocks deletion, update, and non fast forward.
+Ruleset has no bypass actors.
+Disable ruleset first to move a tag, then re-enable it.
+
 ## Immutable releases
 
 Immutable releases are enabled at repo level.

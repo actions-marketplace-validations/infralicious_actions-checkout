@@ -12,6 +12,10 @@
 # Immutable releases are not in this file.
 # Settings app cannot set immutable releases.
 # Enable it with gh api PUT for immutable releases.
+# SHA pinning is not in this file.
+# Enable it with gh api PUT for Actions permissions.
+# Tag ruleset is not in this file.
+# Create it with gh api POST for rulesets.
 
 repository:
   name: actions-checkout

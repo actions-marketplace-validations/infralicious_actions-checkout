@@ -16,6 +16,14 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Immutable release locks its tag to one commit.
 - Immutable releases are enabled at repo level via gh cli.
 - Settings file cannot enable immutable releases.
+- SHA pinning is enforced at repo level via Actions permissions.
+- Settings file cannot set SHA pinning.
+- Enable it with gh api PUT for Actions permissions.
+- Tag ruleset protects v star tags.
+- Settings file cannot set tag ruleset.
+- Ruleset blocks tag deletion, update, and non fast forward.
+- Ruleset has no bypass actors.
+- Disable ruleset first to move a tag, then re-enable it.
 - Sign every tag with SSH signing.
 - Create a Release for every tag.
 - Release notes must link to the upstream release.
