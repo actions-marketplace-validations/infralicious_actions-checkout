@@ -50,6 +50,8 @@ inputs:
     description: >
       The user to use when connecting to the remote SSH host. By default 'git' is used.
     default: git
+  # Only default that differs from upstream.
+  # Upstream default is true, this default is false.
   persist-credentials:
     description: 'Whether to configure the token or SSH key with the local git config'
     default: false
@@ -120,8 +122,12 @@ runs:
   steps:
     - name: Checkout
       id: checkout
-      # Upstream actions/checkout v7.0.1, pinned by full SHA.
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # This step uses upstream, not this wrapper.
+      # Wrapper cannot call itself.
+      # Wrapper pins upstream by full SHA.
+      # Pin matches repo tag v7.0.1.
+      # Wrapper passes all inputs to upstream.
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # upstream v7.0.1, passthrough only
       with:
         # Fallback to the workflow context when the caller omits these inputs.
         # A composite action cannot evaluate a context default by itself.

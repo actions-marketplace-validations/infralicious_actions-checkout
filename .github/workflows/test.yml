@@ -17,7 +17,7 @@ jobs:
       # Published wrapper failure would block local test.
       # Upstream setup keeps local test independent.
       - name: Set up repo files
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, setup uses upstream, not wrapper
         with:
           persist-credentials: false
       - name: Validate action file
@@ -39,12 +39,12 @@ jobs:
       # These steps test our wrapper.
       - name: Checkout with defaults
         id: default
-        uses: ./
+        uses: ./ # local wrapper
         with:
           path: test-default
       - name: Checkout with persist true
         id: persist
-        uses: ./
+        uses: ./ # local wrapper
         with:
           path: test-persist
           persist-credentials: true
