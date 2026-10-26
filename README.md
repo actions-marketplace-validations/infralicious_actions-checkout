@@ -1,6 +1,8 @@
 # Checkout without persisted credentials
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/infralicious/actions-checkout/badge)](https://securityscorecards.dev/viewer/?uri=github.com/infralicious/actions-checkout)
+[![Test](https://github.com/infralicious/actions-checkout/actions/workflows/test.yml/badge.svg)](https://github.com/infralicious/actions-checkout/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 This action passes through to `actions/checkout`.
 It uses the full upstream SHA, not a moving tag.
