@@ -1,4 +1,4 @@
-name: 'Checkout'
+name: 'Checkout without persisted credentials'
 description: 'Checkout a Git repository at a particular version'
 branding:
   icon: 'shield'

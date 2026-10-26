@@ -49,11 +49,16 @@ jobs:
           path: test-persist
           persist-credentials: true
       - name: Check outputs and credential state
+        env:
+          DEFAULT_REF: ${{ steps.default.outputs.ref }}
+          DEFAULT_COMMIT: ${{ steps.default.outputs.commit }}
+          PERSIST_REF: ${{ steps.persist.outputs.ref }}
+          PERSIST_COMMIT: ${{ steps.persist.outputs.commit }}
         run: |
-          test -n "${{ steps.default.outputs.ref }}"
-          test -n "${{ steps.default.outputs.commit }}"
-          test -n "${{ steps.persist.outputs.ref }}"
-          test -n "${{ steps.persist.outputs.commit }}"
+          test -n "$DEFAULT_REF"
+          test -n "$DEFAULT_COMMIT"
+          test -n "$PERSIST_REF"
+          test -n "$PERSIST_COMMIT"
           test -f test-default/README.md
           test -f test-persist/README.md
           if git -C test-default config --local --list | grep -Eq 'extraheader|git-credentials-'; then
