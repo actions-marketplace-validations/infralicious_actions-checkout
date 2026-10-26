@@ -12,7 +12,7 @@
 
 repository:
   name: actions-checkout
-  description: Checkout action with persist-credentials false by default, pinned to actions/checkout v7.0.1
+  description: Checkout action with persist-credentials false by default, pinned to actions/checkout
   # Topics stay a string. The app splits this value on commas.
   topics: checkout, github-actions, security
   private: false

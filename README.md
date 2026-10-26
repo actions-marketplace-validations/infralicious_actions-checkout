@@ -1,6 +1,6 @@
 # Checkout, without persisted credentials by default
 
-This action passes through to `actions/checkout` v7.0.1.
+This action passes through to `actions/checkout`.
 It uses the full upstream SHA, not a moving tag.
 It keeps every upstream input and default.
 Only `persist-credentials` changes.
@@ -27,9 +27,9 @@ Upstream default stores a token for later git use.
 [GitHub Security Lab](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/) links this default to pwn requests.
 [ArtiPACKED research](https://dev.to/rxkov/github-actions-when-the-cicd-pipeline-becomes-a-secrets-exfiltration-vector-pea) found tokens in uploaded artifacts in 2024.
 Older versions stored the token in `.git/config` directly.
-Version 6 and later store it in a temp file instead.
+Newer versions store it in a temp file instead.
 Later steps can still use that temp file for git.
-Version 7 keeps that temp file design.
+Current version keeps that temp file design.
 False removes that later use by default.
 This repo removes that miss by default.
 You do not need to repeat the setting.
@@ -62,7 +62,7 @@ SHA form:
 + uses: infralicious/actions-checkout@c9b2547edbff66d33a1c6b175ea258c8d10c6689 # v7.0.1
 ```
 
-Tag v7.0.1 in this repo pins upstream SHA internally.
+Tag in this repo pins upstream SHA internally.
 Our SHA for v7.0.1 is c9b2547edbff66d33a1c6b175ea258c8d10c6689.
 Use that SHA for full SHA pinning.
 Use commit SHA, not tag object SHA.
@@ -111,8 +111,8 @@ Upstream version is v7.0.1.
 Upstream SHA is `3d3c42e5aac5ba805825da76410c181273ba90b1`.
 This repo tag is v7.0.1.
 This repo SHA is `c9b2547edbff66d33a1c6b175ea258c8d10c6689`.
-Use v7.0.1 only, not v7.
-A v7 tag does not exist in this repo.
+Use exact version tag only, not floating major tag.
+A floating major tag does not exist in this repo.
 Update this tag when upstream releases a new version.
 Match the new tag to the new upstream version.
 
@@ -137,7 +137,7 @@ Automation never changes a default by itself.
 
 ## Inputs
 
-Inputs match upstream v7.0.1 exactly, except one change.
+Inputs match upstream exactly, except one change.
 `persist-credentials` defaults to `false`.
 See `action.yml` for the full input list.
 
