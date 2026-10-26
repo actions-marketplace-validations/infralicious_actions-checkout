@@ -1,5 +1,8 @@
 name: 'Checkout'
 description: 'Checkout a Git repository at a particular version'
+branding:
+  icon: 'shield'
+  color: 'green'
 inputs:
   repository:
     description: 'Repository name with owner. For example, actions/checkout'
