@@ -38,7 +38,7 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 ## Renovate
 
 - Renovate owns action SHA bumps.
-- Renovate config lives in renovate.json.
+- Renovate config lives in renovate.json5.
 - Renovate runs before 3am on Monday.
 - Renovate groups GitHub Actions updates in one PR.
 - Renovate updates code SHA lines and README version lines.
