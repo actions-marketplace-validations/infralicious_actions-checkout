@@ -42,10 +42,14 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 
 ## Hardcoded versions and SHAs
 
+- Do not hardcode a changing value in docs unless automation updates it.
 - Do not hardcode a SHA in README.
+- Do not hardcode a version in README.
 - Use <upstream-sha> and <repo-sha> placeholders in README.
+- Use <version> placeholder in README.
 - Keep a SHA in code lines that pin an action.
 - Keep a version comment on a code SHA line.
+- Code lines are automated by Renovate, so they are the exception.
 - Remove a version from descriptions, intros, and prose comments.
 - Generalize a comment when a version would go stale.
 - Repo description must not mention an exact version.
