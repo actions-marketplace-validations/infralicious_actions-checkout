@@ -147,6 +147,12 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Safe-settings sync does not manage immutable releases.
 - Safe-settings sync does not manage SHA pinning.
 
+## Decisions
+
+- Record important decisions as ADRs in docs/adrs/.
+- An ADR ships in the same commit as its decision.
+- Small changes need no ADR.
+
 ## Do not touch
 
 - Do not copy upstream code into this repo.

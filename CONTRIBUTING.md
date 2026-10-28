@@ -66,6 +66,11 @@ Publish needs a primary category.
 Publish needs two factor authentication.
 Org owner must accept the agreement.
 Name must be unique on the Marketplace.
+Publish is UI only.
+gh cannot publish to Marketplace.
+For a new version, publish the new release, not the old release.
+Edit the new release, check Marketplace publish, save.
+Verify listing shows the new version.
 
 ## Major tag
 
