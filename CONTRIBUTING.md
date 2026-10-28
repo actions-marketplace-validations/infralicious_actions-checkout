@@ -27,6 +27,8 @@ Set persist-credentials default to false only.
 Change no other input default.
 Merge the PR when tests pass.
 Create a new signed repo tag that matches upstream tag.
+Do not backfill older upstream tags.
+Fill only newer upstream releases.
 Create a GitHub Release for that tag.
 Release notes must link to the upstream release.
 Release notes must use the upstream release URL for that tag.
@@ -94,10 +96,11 @@ Enable it with gh api PUT for Actions permissions.
 All external actions must use full SHA, not a tag.
 Local ./ action is not a third party action.
 Tag ruleset protects v star tags.
-Safe-settings does not manage tag ruleset.
+Safe-settings manages tag ruleset.
+Tag ruleset lives in safe-settings/repos/actions-checkout.yml.
 Ruleset blocks deletion, update, and non fast forward.
 Ruleset has no bypass actors.
-Disable ruleset first to move a tag, then re-enable it.
+Disable ruleset in safe-settings YAML first to move a tag, then restore it.
 
 ## Immutable releases
 

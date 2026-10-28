@@ -20,11 +20,11 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Safe-settings does not manage SHA pinning.
 - Enable it with gh api PUT for Actions permissions.
 - Tag ruleset protects v star tags.
-- Safe-settings does not manage tag ruleset.
-- Safe-settings ruleset sync would delete manual ruleset, so rulesets stay manual.
+- Safe-settings manages tag ruleset.
+- Tag ruleset lives in safe-settings/repos/actions-checkout.yml.
 - Ruleset blocks tag deletion, update, and non fast forward.
 - Ruleset has no bypass actors.
-- Disable ruleset first to move a tag, then re-enable it.
+- Disable ruleset in safe-settings YAML first to move a tag, then restore it.
 - Sign every tag with SSH signing.
 - Create a Release for every tag.
 - Release notes must link to the upstream release.
@@ -140,9 +140,10 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Repo override is safe-settings/repos/actions-checkout.yml.
 - Change settings there, not in the GitHub UI.
 - Do not recreate local .github/settings.yml.
-- Main branch protection is on: no force push, no deletion. Direct pushes still work.
+- Protect main ruleset is on: blocks force push and deletion. Direct pushes still work.
+- Protect main ruleset comes from safe-settings/suborgs/public.yml.
 - No review or check gates are set on main.
-- Safe-settings sync does not manage manual Tag ruleset.
+- Safe-settings manages Tag ruleset.
 - Safe-settings sync does not manage immutable releases.
 - Safe-settings sync does not manage SHA pinning.
 
