@@ -48,6 +48,12 @@ jobs:
         with:
           path: test-persist
           persist-credentials: true
+      - name: Checkout with full history
+        id: depth
+        uses: ./ # local wrapper
+        with:
+          path: test-depth
+          fetch-depth: 0
       - name: Check outputs and credential state
         env:
           DEFAULT_REF: ${{ steps.default.outputs.ref }}
@@ -61,6 +67,9 @@ jobs:
           test -n "$PERSIST_COMMIT"
           test -f test-default/README.md
           test -f test-persist/README.md
+          test -f test-depth/README.md
+          depth_count=$(git -C test-depth rev-list --count HEAD)
+          test "$depth_count" -gt 1
           if git -C test-default config --local --list | grep -Eq 'extraheader|git-credentials-'; then
             echo "default checkout persisted a credential"
             exit 1

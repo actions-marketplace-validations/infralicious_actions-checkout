@@ -67,6 +67,7 @@ Tag in this repo pins upstream SHA internally.
 Use the commit SHA for the tag for full SHA pinning.
 Find that SHA on the release page.
 Use commit SHA, not tag object SHA.
+Repo SHA is the tag commit, not upstream SHA.
 
 ## Use
 
