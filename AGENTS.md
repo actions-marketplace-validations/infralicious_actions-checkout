@@ -15,12 +15,13 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 - Floating tag cannot move after an immutable release.
 - Immutable release locks its tag to one commit.
 - Immutable releases are enabled at repo level via gh cli.
-- Settings file cannot enable immutable releases.
+- Safe-settings does not manage immutable releases.
 - SHA pinning is enforced at repo level via Actions permissions.
-- Settings file cannot set SHA pinning.
+- Safe-settings does not manage SHA pinning.
 - Enable it with gh api PUT for Actions permissions.
 - Tag ruleset protects v star tags.
-- Settings file cannot set tag ruleset.
+- Safe-settings does not manage tag ruleset.
+- Safe-settings ruleset sync would delete manual ruleset, so rulesets stay manual.
 - Ruleset blocks tag deletion, update, and non fast forward.
 - Ruleset has no bypass actors.
 - Disable ruleset first to move a tag, then re-enable it.
@@ -94,7 +95,8 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 ## Automation
 
 - Repo is not fully automated.
-- Test, Upstream-check, Settings, Scorecard, and Renovate run automatically.
+- Test, Upstream-check, Scorecard, and Renovate run automatically.
+- Safe-settings sync runs from admin repo, not in this repo.
 - Human still reviews and merges Renovate PRs.
 - Human still creates signed tags.
 - Human still pushes after approval.
@@ -131,9 +133,17 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 
 ## Repo settings as code
 
-- `.github/settings.yml` is enforced by the Settings app. Change settings in that file, not in the GitHub UI.
+- Repo settings live in infralicious/.github, under safe-settings/.
+- Baseline is safe-settings/settings.yml.
+- Public suborg is safe-settings/suborgs/public.yml.
+- Repo override is safe-settings/repos/actions-checkout.yml.
+- Change settings there, not in the GitHub UI.
+- Do not recreate local .github/settings.yml.
 - Main branch protection is on: no force push, no deletion. Direct pushes still work.
 - No review or check gates are set on main.
+- Safe-settings sync does not manage manual Tag ruleset.
+- Safe-settings sync does not manage immutable releases.
+- Safe-settings sync does not manage SHA pinning.
 
 ## Do not touch
 
