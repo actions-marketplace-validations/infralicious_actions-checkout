@@ -53,9 +53,9 @@ Automation never changes a default by itself.
 
 ## Marketplace publish
 
-Action is not published on the Marketplace yet.
-Action works without a Marketplace listing.
-Users can use the repo tag directly.
+Action is published on the Marketplace for v7.0.1.
+Listing is https://github.com/marketplace/actions/checkout-without-persisted-credentials
+Users can also use the repo tag directly.
 Publish needs branding in action.yml.
 Publish needs a GitHub Release for the tag.
 Publish needs a signed tag for the tag.

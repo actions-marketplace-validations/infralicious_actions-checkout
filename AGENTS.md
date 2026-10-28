@@ -115,13 +115,14 @@ Claude Code reads these through CLAUDE.md (`@AGENTS.md`).
 
 ## Marketplace
 
-- Action is not published on the Marketplace yet.
-- Action works without a Marketplace listing.
+- Action is published on the Marketplace.
+- Listing is https://github.com/marketplace/actions/checkout-without-persisted-credentials
+- Users can also use the repo tag directly.
 - Publish needs branding, a release, agreement, and category.
 - Publish needs two factor authentication.
 - Org owner must accept the agreement.
 - Name must be unique on the Marketplace.
-- Current name is Checkout, which may not be unique.
+- Current name is Checkout without persisted credentials.
 - Test workflow setup uses upstream, not this wrapper.
 - Local test steps use `./` for this wrapper.
 - Upstream-check setup stays independent from this wrapper.
