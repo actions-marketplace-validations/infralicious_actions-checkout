@@ -48,19 +48,19 @@ Diff shows step lines, not a patch file.
 Tag form:
 
 ```diff
-- uses: actions/checkout@v7.0.1
+- uses: actions/checkout@<version>
 -   with:
 -     persist-credentials: false
-+ uses: infralicious/actions-checkout@v7.0.1
++ uses: infralicious/actions-checkout@<version>
 ```
 
 SHA form:
 
 ```diff
-- uses: actions/checkout@<upstream-sha> # v7.0.1
+- uses: actions/checkout@<upstream-sha> # <version>
 -   with:
 -     persist-credentials: false
-+ uses: infralicious/actions-checkout@<repo-sha> # v7.0.1
++ uses: infralicious/actions-checkout@<repo-sha> # <version>
 ```
 
 Tag in this repo pins upstream SHA internally.
@@ -71,16 +71,22 @@ Use commit SHA, not tag object SHA.
 ## Use
 
 ```yaml
-- uses: infralicious/actions-checkout@v7.0.1
+name: Test
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: infralicious/actions-checkout@<version>
+      - run: ls
 ```
 
-Use this form to pass an input:
-
-```yaml
-- uses: infralicious/actions-checkout@v7.0.1
-  with:
-    fetch-depth: 0
-```
+Replace <version> with the latest release tag.
+Add a with block to the checkout step to pass an input.
+Use fetch-depth: 0 in that block for full history.
 
 You may omit `repository` and `token`.
 The action then uses the workflow repository and token.

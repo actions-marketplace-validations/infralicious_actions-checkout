@@ -53,9 +53,9 @@ Automation never changes a default by itself.
 
 ## Marketplace publish
 
-Action is not published on the Marketplace yet.
-Action works without a Marketplace listing.
-Users can use the repo tag directly.
+Action is published on the Marketplace for v7.0.1.
+Listing is https://github.com/marketplace/actions/checkout-without-persisted-credentials
+Users can also use the repo tag directly.
 Publish needs branding in action.yml.
 Publish needs a GitHub Release for the tag.
 Publish needs a signed tag for the tag.
@@ -89,12 +89,12 @@ Upstream release URL uses the upstream tag name.
 ## SHA pinning and tag ruleset
 
 SHA pinning is enforced at repo level.
-Settings file cannot set SHA pinning.
+Safe-settings does not manage SHA pinning.
 Enable it with gh api PUT for Actions permissions.
 All external actions must use full SHA, not a tag.
 Local ./ action is not a third party action.
 Tag ruleset protects v star tags.
-Settings file cannot set tag ruleset.
+Safe-settings does not manage tag ruleset.
 Ruleset blocks deletion, update, and non fast forward.
 Ruleset has no bypass actors.
 Disable ruleset first to move a tag, then re-enable it.
@@ -102,7 +102,7 @@ Disable ruleset first to move a tag, then re-enable it.
 ## Immutable releases
 
 Immutable releases are enabled at repo level.
-Settings file cannot enable immutable releases.
+Safe-settings does not manage immutable releases.
 Enable it with gh api PUT for immutable releases.
 Future releases will be immutable automatically.
 Do not move a tag after its release is created.
